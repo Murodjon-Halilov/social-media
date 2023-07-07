@@ -3,8 +3,8 @@ import { styled } from "styled-components";
 export const MessageBox = styled.div`
     /* width: 90%; */
     /* display: inline-block; */
-    background: #000;
-    color: #fff;
+    background: #ccc;
+    color: #000;
     padding: 1rem;
     font-size: 1.2rem;
     border-radius: 10px;
@@ -15,7 +15,7 @@ export const MessageBox = styled.div`
         content: '';
         width: 1.5rem;
         height: 1.5rem;
-        background: #000;
+        background: #ccc;
         clip-path: polygon(100% 0, 0% 100%, 100% 100%);
 
         position: absolute;
@@ -26,6 +26,6 @@ export const MessageBox = styled.div`
 
 export const AutherName = styled.p`
     font-size: .9rem;
-    color: #fff;
+    color: #000;
     cursor: pointer;
 `
