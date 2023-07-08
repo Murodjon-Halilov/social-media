@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MessageBox, AutherName, DateBox, TimeBox } from "./Message.style";
 import { MessageAndAuthContext } from "../contextFolder/messageContext";
 
@@ -8,12 +8,8 @@ const Message = ( { newDate } ) => {
   
   const msgData = usersData ? usersData.reverse() : "";
 
-  const date = new Date(1688825392154)
-
-  console.log(date)
-
-  return (
-    msgData ? msgData.map((userData) => (
+  return msgData
+    ? msgData.map((userData) => (
         <div key={userData._id}>
           <DateBox>
             {console.log(userData.time)}
@@ -22,13 +18,12 @@ const Message = ( { newDate } ) => {
           <AutherName>{userData.author}</AutherName>
           {userData.message}
           <TimeBox>
-          {/* {userData.time.split(' ').splice(4, 1).join()} */}
+          {userData.time.split(' ').splice(4, 1).join()}
         </TimeBox>
         </MessageBox>
         </div>
       ))
-    : ""
-    );
+    : "";
 };
 
 export default Message;
