@@ -10,9 +10,8 @@ import {
 } from "./MessageBox.style";
 
 const MessageBox = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const formRef = useRef(null);
-  console.log("🚀 ~ file: MessageBox.jsx:15 ~ MessageBox ~ formRef:", formRef.current)
 
   const sendJSON = async (url, uploadData) => {
     try {
@@ -35,15 +34,14 @@ const MessageBox = () => {
   }, []);
 
   if (data) {
-    console.log(data);
+    console.log(data.data.chat);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e)
+    console.log(e.target)
     if (formRef) {
-      const data = new FormData(formRef.current);
-      console.log(data);
+      console.log(new FormData(e.target));
     }
   };
 
