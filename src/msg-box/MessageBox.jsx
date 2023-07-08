@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import InputAuth from "../input-box/InputAuth";
 import InputMessage from "../input-box/InputMessage";
 import Message from "../msg/Message";
@@ -8,24 +8,11 @@ import {
   Button,
   IconSend,
 } from "./MessageBox.style";
+import { MessageAndAuthContext } from "../contextFolder/messageContext";
 
 const MessageBox = () => {
   const [data, setData] = useState(null);
   const formRef = useRef(null);
-
-  const sendJSON = async (url, uploadData) => {
-    try {
-      await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(uploadData),
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   useEffect(() => {
     fetch(`http://192.168.0.107:5000/api/v1/ohio`)
@@ -33,17 +20,11 @@ const MessageBox = () => {
       .then((data) => setData(data));
   }, []);
 
-  if (data) {
-    console.log(data.data.chat);
-  }
+  const { setUsersData } = useContext(MessageAndAuthContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target)
-    if (formRef) {
-      console.log(new FormData(e.target));
-    }
-  };
+  if (data) {
+    setUsersData(data.data.chat);
+  }
 
   return (
     <>
@@ -51,7 +32,7 @@ const MessageBox = () => {
         <Message />
       </MessageBoxContainer>
       <InputsBox>
-        <form ref={formRef} onSubmit={handleSubmit}>
+        <form ref={formRef}>
           <InputAuth />
           <InputMessage />
           <Button>

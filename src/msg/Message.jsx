@@ -1,13 +1,24 @@
-import { MessageBox, AutherName } from "./Message.style"
+import { useContext } from "react";
+import { MessageBox, AutherName } from "./Message.style";
+import { MessageAndAuthContext } from "../contextFolder/messageContext";
 
 const Message = () => {
+
+  const {usersData} = useContext(MessageAndAuthContext);
+
+
+  if(usersData) {
+    usersData.map(userData => console.log(userData))
+  }
+
   return (
-    <MessageBox>
-        <AutherName>
-            Murodjon Halilov
-        </AutherName>
-        Message
-    </MessageBox>
+
+    usersData ? usersData.map(userData => (
+      <MessageBox key={userData.id}>
+        <AutherName>{userData.author}</AutherName>
+        {userData.message}
+      </MessageBox>
+    )) : ''
   )
 }
 
