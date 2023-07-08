@@ -56,6 +56,7 @@ const MessageBox = () => {
       });
 
       const data = await res.json();
+      return data;
     };
 
     await sendJSON("http://192.168.0.107:5000/api/v1/ohio", data);
