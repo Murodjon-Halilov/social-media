@@ -1,13 +1,14 @@
 import { styled } from "styled-components";
 
 export const AuthLabel = styled.label`
+width: 100%;
   font-size: 1.3rem;
   color: #fff;
   transition: all 0.3s ease-in-out;
 
   position: absolute;
-  left: 24rem;
-  bottom: 3rem;
+  top: .3rem;
+  left: .5rem;
   z-index: -1;
 `;
 
@@ -20,9 +21,18 @@ export const AuthInput = styled.input`
   font-size: 1.2rem;
   color: white;
 
+  &:focus:invalid + ${AuthLabel} {
+    top: -1.5rem;
+    font-size: 1rem;
+  }
+
   &:focus + ${AuthLabel} {
-    bottom: 5.5rem;
-    left: 23rem;
+    top: -1.5rem;
     font-size: 1rem;
   }
 `;
+
+export const InputBoxAuth = styled.div`
+  position: relative;
+  display: inline-block;
+`

@@ -1,12 +1,13 @@
-import { AuthInput, AuthLabel } from './InputAuth.style'
+import { AuthInput, AuthLabel } from "./InputAuth.style";
+import { InputBoxAuth } from "./InputAuth.style";
 
 const InputAuth = () => {
   return (
-    <>
-       <AuthInput type="text" name="" id="" /> 
-       <AuthLabel>Who are You?</AuthLabel>
-    </>
-  )
-}
+    <InputBoxAuth>
+      <AuthInput type="text" name="author" id="author" />
+      <AuthLabel htmlFor="author">Who are You?</AuthLabel>
+    </InputBoxAuth>
+  );
+};
 
-export default InputAuth
+export default InputAuth;
