@@ -11,20 +11,18 @@ import {
 import { MessageAndAuthContext } from "../contextFolder/messageContext";
 
 const MessageBox = () => {
+  const { setUsersData } = useContext(MessageAndAuthContext);
   const [data, setData] = useState(null);
   const formRef = useRef(null);
 
   useEffect(() => {
     fetch(`http://192.168.0.107:5000/api/v1/ohio`)
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data);
+        setUsersData(data.data.chat);
+      });
   }, []);
-
-  const { setUsersData } = useContext(MessageAndAuthContext);
-
-  if (data) {
-    setUsersData(data.data.chat);
-  }
 
   return (
     <>
