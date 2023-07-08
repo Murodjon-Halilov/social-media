@@ -13,6 +13,7 @@ import { MessageAndAuthContext } from "../contextFolder/messageContext";
 const MessageBox = () => {
   const { setUsersData } = useContext(MessageAndAuthContext);
   const [data, setData] = useState(null);
+  const [newData, setNewData] = useState(null);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -37,7 +38,6 @@ const MessageBox = () => {
         time: date,
       },
     ];
-
     return data;
   };
 
@@ -56,7 +56,6 @@ const MessageBox = () => {
       });
 
       const data = await res.json();
-      return data;
     };
 
     await sendJSON("http://192.168.0.107:5000/api/v1/ohio", data);
@@ -68,7 +67,7 @@ const MessageBox = () => {
   return (
     <>
       <MessageBoxContainer>
-        <Message />
+        <Message newData={newData ? newData.data.Chat : ''}/>
       </MessageBoxContainer>
       <InputsBox>
         <form ref={formRef} onSubmit={handleSubmit}>
