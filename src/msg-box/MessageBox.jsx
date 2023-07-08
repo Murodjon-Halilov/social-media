@@ -24,13 +24,52 @@ const MessageBox = () => {
       });
   }, []);
 
+  const getFormData = () => {
+    const dataForm = [...new FormData(formRef.current)]
+    const dataObj = Object.fromEntries(dataForm)
+    
+    const data = [
+      {
+        author: dataObj.author,
+        message: dataObj.message
+      }
+    ]
+    console.log(data)
+    return data
+  }
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const data = getFormData()
+
+    const sendJSON = async (url, body) => {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+
+      console.log(res)
+
+      // if(!res.ok) alert(new Error('mazgi'))
+
+      const data = await res.json()
+
+      console.log(data)
+    }
+
+    await sendJSON('http://192.168.0.107:5000/api/v1/ohio', data)
+  };
+
   return (
     <>
       <MessageBoxContainer>
         <Message />
       </MessageBoxContainer>
       <InputsBox>
-        <form ref={formRef}>
+        <form ref={formRef} onSubmit={handleSubmit}>
           <InputAuth />
           <InputMessage />
           <Button>
