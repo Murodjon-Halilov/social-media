@@ -22,16 +22,19 @@ const MessageBox = () => {
         setData(data);
         setUsersData(data.data.chats);
       });
-  }, [data]);
+  }, []);
 
   const getFormData = () => {
     const dataForm = [...new FormData(formRef.current)];
     const dataObj = Object.fromEntries(dataForm);
 
+    const date = new Date();
+
     const data = [
       {
         author: dataObj.author,
         message: dataObj.message,
+        time: date,
       },
     ];
 
@@ -53,12 +56,13 @@ const MessageBox = () => {
       });
 
       const data = await res.json();
+      return data;
     };
 
     await sendJSON("http://192.168.0.107:5000/api/v1/ohio", data);
 
-    e.target[0].value = '';
-    e.target[1].value = '';
+    e.target[0].value = "";
+    e.target[1].value = "";
   };
 
   return (

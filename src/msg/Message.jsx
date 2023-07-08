@@ -10,7 +10,7 @@ const Message = () => {
   return msgData
     ? msgData.map((userData) => (
         <div key={userData._id}>
-          <DateBox>{console.log(new Date(userData.time).toDateString())}</DateBox>
+          <DateBox>{new Date(userData.time).toString().split(' ').splice(1, 3).join()}</DateBox>
           <MessageBox>
             <AutherName>{userData.author}</AutherName>
             {userData.message}
