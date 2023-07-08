@@ -12,9 +12,8 @@ const Message = () => {
   }
 
   return (
-
     usersData ? usersData.map(userData => (
-      <MessageBox key={userData.id}>
+      <MessageBox key={userData._id}>
         <AutherName>{userData.author}</AutherName>
         {userData.message}
       </MessageBox>

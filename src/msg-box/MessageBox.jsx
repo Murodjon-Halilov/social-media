@@ -20,7 +20,7 @@ const MessageBox = () => {
       .then((res) => res.json())
       .then((data) => {
         setData(data);
-        setUsersData(data.data.chat);
+        setUsersData(data.data.chats);
       });
   }, []);
 
