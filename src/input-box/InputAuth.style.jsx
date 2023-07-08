@@ -14,12 +14,11 @@ width: 100%;
 
 export const AuthInput = styled.input`
   outline: none;
-  border: 2px solid #fff;
+  border: 2px solid red;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-  background: transparent;
   font-size: 1.2rem;
-  color: white;
+  color: black;
 
   &:focus:invalid + ${AuthLabel} {
     top: -1.5rem;
