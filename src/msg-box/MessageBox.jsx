@@ -22,7 +22,7 @@ const MessageBox = () => {
         setData(data);
         setUsersData(data.data.chats);
       });
-  }, []);
+  }, [data]);
 
   const getFormData = () => {
     const dataForm = [...new FormData(formRef.current)]
