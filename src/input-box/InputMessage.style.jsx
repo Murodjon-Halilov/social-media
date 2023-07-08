@@ -15,12 +15,11 @@ width: 100%;
 export const InputMessageUser = styled.input`
   width: 27.5rem;
   outline: none;
-  border: 2px solid #fff;
+  border: 2px solid red;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-  background: transparent;
   font-size: 1.2rem;
-  color: white;
+  color: black;
   margin-left: 2rem;
 
   &:focus:invalid + ${MessageLabel} {

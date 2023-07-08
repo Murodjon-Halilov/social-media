@@ -22,46 +22,43 @@ const MessageBox = () => {
         setData(data);
         setUsersData(data.data.chats);
       });
-  }, []);
-  console.log(data)
+  }, [data]);
 
   const getFormData = () => {
-    const dataForm = [...new FormData(formRef.current)]
-    const dataObj = Object.fromEntries(dataForm)
-    
+    const dataForm = [...new FormData(formRef.current)];
+    const dataObj = Object.fromEntries(dataForm);
+
     const data = [
       {
         author: dataObj.author,
-        message: dataObj.message
-      }
-    ]
-    console.log(data)
-    return data
-  }
+        message: dataObj.message,
+      },
+    ];
 
-  const handleSubmit = async(e) => {
+    return data;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = getFormData()
+
+    const data = getFormData();
 
     const sendJSON = async (url, body) => {
       const res = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(body)
-      })
+        body: JSON.stringify(body),
+      });
 
-      console.log(res)
+      const data = await res.json();
+    };
 
-      // if(!res.ok) alert(new Error('mazgi'))
+    await sendJSON("http://192.168.0.107:5000/api/v1/ohio", data);
 
-      const data = await res.json()
-
-      console.log(data)
-    }
-
-    await sendJSON('http://192.168.0.107:5000/api/v1/ohio', data)
+    e.target[0].value = '';
+    e.target[1].value = '';
   };
 
   return (
