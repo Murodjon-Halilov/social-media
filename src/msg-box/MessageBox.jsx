@@ -12,6 +12,21 @@ import {
 const MessageBox = () => {
   const [data, setData] = useState([]);
   const formRef = useRef(null);
+  console.log("🚀 ~ file: MessageBox.jsx:15 ~ MessageBox ~ formRef:", formRef.current)
+
+  const sendJSON = async (url, uploadData) => {
+    try {
+      await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(uploadData),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetch(`http://192.168.0.107:5000/api/v1/ohio`)
@@ -25,8 +40,11 @@ const MessageBox = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    console.log(data);
+    console.log(e)
+    if (formRef) {
+      const data = new FormData(formRef.current);
+      console.log(data);
+    }
   };
 
   return (
