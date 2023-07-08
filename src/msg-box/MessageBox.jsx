@@ -9,6 +9,7 @@ import {
   IconSend,
 } from "./MessageBox.style";
 import { MessageAndAuthContext } from "../contextFolder/messageContext";
+import DeleteBtn from "../delete-btn/DeleteBtn";
 
 const MessageBox = () => {
   const { setUsersData } = useContext(MessageAndAuthContext);
@@ -67,9 +68,14 @@ const MessageBox = () => {
 
   return (
     <>
+      <DeleteBtn>
+
+      </DeleteBtn>
+
       <MessageBoxContainer>
         <Message newData={newData ? newData.data.Chat : ''}/>
       </MessageBoxContainer>
+
       <InputsBox>
         <form ref={formRef} onSubmit={handleSubmit}>
           <InputAuth />
