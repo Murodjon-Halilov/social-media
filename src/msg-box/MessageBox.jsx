@@ -14,7 +14,6 @@ import DeleteBtn from "../delete-btn/DeleteBtn";
 const MessageBox = () => {
   const { setUsersData } = useContext(MessageAndAuthContext);
   const [data, setData] = useState(null);
-  const [newData, setNewData] = useState(null);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -64,6 +63,8 @@ const MessageBox = () => {
 
     e.target[0].value = "";
     e.target[1].value = "";
+
+    <MessageBox />
   };
 
   return (
@@ -73,7 +74,7 @@ const MessageBox = () => {
       </DeleteBtn>
 
       <MessageBoxContainer>
-        <Message newData={newData ? newData.data.Chat : ''}/>
+        <Message />
       </MessageBoxContainer>
 
       <InputsBox>
