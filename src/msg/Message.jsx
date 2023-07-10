@@ -7,6 +7,7 @@ import {
   DeleteMsg,
   MainMsgBox,
   EditButton,
+  MsgText,
 } from "./Message.style";
 import { MessageAndAuthContext } from "../contextFolder/messageContext";
 import EditModal from "../edit-modal/EditModal";
@@ -17,32 +18,38 @@ const Message = () => {
   const msgData = usersData ? usersData.reverse() : "";
 
   const editFunction = async function (userData) {
-    const res = await fetch(`http://192.168.0.107:5000/api/v1/ohio/${userData._id}`, {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-    
+    const res = await fetch(
+      `http://192.168.0.107:5000/api/v1/ohio/${userData._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
+
     // const data = await res.json();
     // return data;
   };
 
-  const deleteMessage = async function(userData) {
-    const res = await fetch(`http://192.168.0.107:5000/api/v1/ohio/${userData._id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-    
+  const deleteMessage = async function (userData) {
+    const res = await fetch(
+      `http://192.168.0.107:5000/api/v1/ohio/${userData._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
+
     // const data = await res.json();
     // console.log(data)
     // return data;
-  }
+  };
 
   return msgData
     ? msgData.map((userData) => (
@@ -55,12 +62,10 @@ const Message = () => {
               .join(" ")}
           </DateBox>
 
-          <EditModal />
-
           <MainMsgBox>
             <MessageBox>
               <AutherName>{userData.author}</AutherName>
-              {userData.message}
+              <MsgText>{userData.message}</MsgText>
               <TimeBox>
                 {new Date(userData.time)
                   .toString()

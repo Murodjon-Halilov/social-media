@@ -3,14 +3,13 @@ import { styled } from "styled-components";
 export const MessageBox = styled.div`
   /* width: 90%; */
   /* display: inline-block; */
+  /* max-width: 95%; */
   background: #ccc;
   color: #000;
-  padding: 1rem;
+  padding: 1.5rem;
   font-size: 1.2rem;
   border-radius: 10px;
-  position: relative;
   margin-top: 1rem;
-
   position: relative;
 
   &::before {
@@ -52,24 +51,23 @@ export const TimeBox = styled.div`
 `;
 
 export const DeleteMsg = styled.button`
-    font-size: 1.2rem;
-    background: transparent;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    outline: none;
-    border: none;
+  font-size: 1.2rem;
+  background: transparent;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  border: none;
 
-    position: absolute;
-    top: 1.5rem;
-    right: -2rem;
-`
+  position: absolute;
+  top: 0.5rem;
+  right: -2rem;
+`;
 
 export const MainMsgBox = styled.div`
-  display: grid;
   width: 95%;
   position: relative;
-`
+`;
 
 export const EditButton = styled.button`
   font-size: 1rem;
@@ -80,6 +78,10 @@ export const EditButton = styled.button`
   cursor: pointer;
 
   position: absolute;
-  top: 4rem;
+  top: 3rem;
   right: -2rem;
+`;
+
+export const MsgText = styled.p`
+  word-wrap: break-word;
 `
