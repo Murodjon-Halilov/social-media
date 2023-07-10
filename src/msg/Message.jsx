@@ -9,8 +9,9 @@ import {
   EditButton,
 } from "./Message.style";
 import { MessageAndAuthContext } from "../contextFolder/messageContext";
+import EditModal from "../edit-modal/EditModal";
 
-const Message = ({ newDate }) => {
+const Message = () => {
   const { usersData } = useContext(MessageAndAuthContext);
 
   const msgData = usersData ? usersData.reverse() : "";
@@ -40,6 +41,8 @@ const Message = ({ newDate }) => {
               .join(" ")}
           </DateBox>
 
+          <EditModal />
+
           <MainMsgBox>
             <MessageBox>
               <AutherName>{userData.author}</AutherName>
@@ -58,7 +61,7 @@ const Message = ({ newDate }) => {
                 <i className="fa fa-trash"></i>
               </DeleteMsg>
               <br />
-              <EditButton onClick={() => editFunction(userData)}>
+              <EditButton>
                 <i className="fa fa-pen"></i>
               </EditButton>
             </>
