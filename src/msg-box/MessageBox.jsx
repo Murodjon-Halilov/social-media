@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useContext } from "react";
+import { useEffect, useState, useRef, useContext, useReducer } from "react";
 import InputAuth from "../input-box/InputAuth";
 import InputMessage from "../input-box/InputMessage";
 import Message from "../msg/Message";
@@ -13,6 +13,7 @@ import DeleteBtn from "../delete-btn/DeleteBtn";
 
 const MessageBox = () => {
   const { setUsersData } = useContext(MessageAndAuthContext);
+  const [refresh, forceRefresh] = useReducer(x => x + 1, 0)
   const [data, setData] = useState(null);
   const formRef = useRef(null);
 
@@ -23,7 +24,7 @@ const MessageBox = () => {
         setData(data);
         setUsersData(data.data.chats);
       });
-  }, []);
+  }, [refresh])
 
   const getFormData = () => {
     const dataForm = [...new FormData(formRef.current)];
@@ -55,8 +56,8 @@ const MessageBox = () => {
         body: JSON.stringify(body),
       });
 
-      const data = await res.json();
-      return data;
+      await res.json();
+      forceRefresh()
     };
 
     await sendJSON("http://192.168.0.107:5000/api/v1/ohio", data);
