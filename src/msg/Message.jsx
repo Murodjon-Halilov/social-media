@@ -26,9 +26,23 @@ const Message = () => {
       body: JSON.stringify(userData),
     })
     
-    const data = await res.json();
-    return data;
+    // const data = await res.json();
+    // return data;
   };
+
+  const deleteMessage = async function(userData) {
+    const res = await fetch(`http://192.168.0.107:5000/api/v1/ohio/${userData._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+    
+    // const data = await res.json();
+    // console.log(data)
+    // return data;
+  }
 
   return msgData
     ? msgData.map((userData) => (
@@ -57,7 +71,7 @@ const Message = () => {
             </MessageBox>
 
             <>
-              <DeleteMsg>
+              <DeleteMsg onClick={() => deleteMessage(userData)}>
                 <i className="fa fa-trash"></i>
               </DeleteMsg>
               <br />

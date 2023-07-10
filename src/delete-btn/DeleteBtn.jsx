@@ -14,6 +14,8 @@ const DeleteBtn = () => {
       console.error(error);
     }
   };
+  
+  // eslint-disable-next-line no-lone-blocks
   {
     return (
       <div>
@@ -21,7 +23,7 @@ const DeleteBtn = () => {
             <i className="fa fa-trash"></i>
         </DeleteButton>
       </div>
-    );
+    )
   }
 };
 

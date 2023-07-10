@@ -63,6 +63,8 @@ const MessageBox = () => {
 
     e.target[0].value = "";
     e.target[1].value = "";
+
+    <MessageBox />
   };
 
   return (
