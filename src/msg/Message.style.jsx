@@ -50,3 +50,36 @@ export const TimeBox = styled.div`
   right: 0.5rem;
   bottom: 0.1rem;
 `;
+
+export const DeleteMsg = styled.button`
+    font-size: 1.2rem;
+    background: transparent;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+
+    position: absolute;
+    top: 1.5rem;
+    right: -2rem;
+`
+
+export const MainMsgBox = styled.div`
+  display: grid;
+  width: 95%;
+  position: relative;
+`
+
+export const EditButton = styled.button`
+  font-size: 1rem;
+  color: white;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+
+  position: absolute;
+  top: 4rem;
+  right: -2rem;
+`
