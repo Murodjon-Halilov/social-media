@@ -9,22 +9,25 @@ import {
   IconSend,
 } from "./MessageBox.style";
 import { MessageAndAuthContext } from "../contextFolder/messageContext";
-import DeleteBtn from "../delete-btn/DeleteBtn";
 
 const MessageBox = () => {
-  const { setUsersData } = useContext(MessageAndAuthContext);
-  const [refresh, forceRefresh] = useReducer(x => x + 1, 0)
-  const [data, setData] = useState(null);
+  const { usersData, setUsersData } = useContext(MessageAndAuthContext);
+
   const formRef = useRef(null);
 
   useEffect(() => {
-    fetch(`http://192.168.0.107:5000/api/v1/ohio`)
+    // fetch(`http://192.168.0.107:5000/api/v1/ohio`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setData(data);
+    //     setUsersData(data.data.chats);
+    //   });
+    fetch(`http://localhost:3002/messages`)
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
-        setUsersData(data.data.chats);
+        setUsersData(data.reverse());
       });
-  }, [refresh])
+  }, []);
 
   const getFormData = () => {
     const dataForm = [...new FormData(formRef.current)];
@@ -46,36 +49,40 @@ const MessageBox = () => {
     e.preventDefault();
 
     const data = getFormData();
+    // const sendJSON = async (url, body) => {
+    //   const res = await fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(body),
+    //   });
 
-    const sendJSON = async (url, body) => {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+    //   await res.json();
+    //   forceRefresh()
+    // };
 
-      await res.json();
-      forceRefresh()
-    };
+    const res = await fetch("http://localhost:3002/messages", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data[0]),
+    });
 
-    await sendJSON("http://192.168.0.107:5000/api/v1/ohio", data);
+    const dataRes = await res.json();
+
+    setUsersData([...usersData, dataRes]);
 
     e.target[0].value = "";
     e.target[1].value = "";
-
-    <MessageBox />
   };
 
   return (
     <>
-      <DeleteBtn>
-
-      </DeleteBtn>
-
       <MessageBoxContainer>
-        <Message />
+        {usersData &&
+          usersData.map((user) => <Message key={user.id} userData={user} />)}
       </MessageBoxContainer>
 
       <InputsBox>

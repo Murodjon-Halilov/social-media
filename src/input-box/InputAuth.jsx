@@ -1,10 +1,19 @@
 import { AuthInput, AuthLabel } from "./InputAuth.style";
 import { InputBoxAuth } from "./InputAuth.style";
 
-const InputAuth = () => {
+const InputAuth = (props) => {
   return (
     <InputBoxAuth>
-      <AuthInput type="text" name="author" id="author" placeholder="Who are You?" />
+      <AuthInput
+        readOnly={props.readOnly}
+        defaultValue={props.defaultValue}
+        type="text"
+        name="author"
+        id="author"
+        placeholder="Who are You?"
+        required
+        title="Enter your Name..."
+      />
       {/* <AuthLabel htmlFor="author">Who are You?</AuthLabel> */}
     </InputBoxAuth>
   );

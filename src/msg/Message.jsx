@@ -9,85 +9,75 @@ import {
   EditButton,
   MsgText,
 } from "./Message.style";
-import { MessageAndAuthContext } from "../contextFolder/messageContext";
 import EditModal from "../edit-modal/EditModal";
+import { MessageAndAuthContext } from "../contextFolder/messageContext";
 
-const Message = () => {
-  const { usersData } = useContext(MessageAndAuthContext);
+const Message = ({ userData }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const { setUsersData } = useContext(MessageAndAuthContext);
 
-  const msgData = usersData ? usersData.reverse() : "";
-
-  const editFunction = async function (userData) {
-    const res = await fetch(
-      `http://192.168.0.107:5000/api/v1/ohio/${userData._id}`,
-      {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      }
-    );
-
-    // const data = await res.json();
-    // return data;
-  };
-
-  const deleteMessage = async function (userData) {
-    const res = await fetch(
-      `http://192.168.0.107:5000/api/v1/ohio/${userData._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      }
-    );
+  const deleteMessage = async function (id) {
+    // const res = await fetch(
+    //   `http://192.168.0.107:5000/api/v1/ohio/${userData._id}`,
+    //   {
+    //     method: "DELETE",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(userData),
+    //   }
+    // );
 
     // const data = await res.json();
     // console.log(data)
     // return data;
+
+    const res = await fetch(`http://localhost:3002/messages/${id}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      await fetch(`http://localhost:3002/messages`)
+        .then((res) => res.json())
+        .then((data) => {
+          setUsersData(data);
+        });
+    }
   };
 
-  return msgData
-    ? msgData.map((userData) => (
-        <div key={userData._id}>
-          <DateBox>
-            {new Date(userData.time)
-              .toDateString()
-              .split(" ")
-              .slice(1, 4)
-              .join(" ")}
-          </DateBox>
+  return (
+    <div>
+      <DateBox>
+        {new Date(userData.time)
+          .toDateString()
+          .split(" ")
+          .slice(1, 4)
+          .join(" ")}
+      </DateBox>
 
-          <MainMsgBox>
-            <MessageBox>
-              <AutherName>{userData.author}</AutherName>
-              <MsgText>{userData.message}</MsgText>
-              <TimeBox>
-                {new Date(userData.time)
-                  .toString()
-                  .split(" ")
-                  .splice(4, 1)
-                  .join()}
-              </TimeBox>
-            </MessageBox>
-
-            <>
-              <DeleteMsg onClick={() => deleteMessage(userData)}>
-                <i className="fa fa-trash"></i>
-              </DeleteMsg>
-              <br />
-              <EditButton>
-                <i className="fa fa-pen"></i>
-              </EditButton>
-            </>
-          </MainMsgBox>
-        </div>
-      ))
-    : "";
+      {openModal && (
+        <EditModal userData={userData} closeModal={() => setOpenModal(false)} />
+      )}
+      <MainMsgBox>
+        <MessageBox>
+          <AutherName>{userData.author}</AutherName>
+          <MsgText>{userData.message}</MsgText>
+          <TimeBox>
+            {new Date(userData.time).toString().split(" ").splice(4, 1).join()}
+          </TimeBox>
+        </MessageBox>
+        <>
+          <DeleteMsg onClick={() => deleteMessage(userData.id)}>
+            <i className="fa fa-trash"></i>
+          </DeleteMsg>
+          <br />
+          <EditButton onClick={() => setOpenModal(true)}>
+            <i className="fa fa-pen"></i>
+          </EditButton>
+        </>
+      </MainMsgBox>
+    </div>
+  );
 };
 
 export default Message;

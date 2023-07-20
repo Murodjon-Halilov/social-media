@@ -4,7 +4,7 @@ export const MessageBox = styled.div`
   /* width: 90%; */
   /* display: inline-block; */
   /* max-width: 95%; */
-  background: #ccc;
+  background: #fff;
   color: #000;
   padding: 1.5rem;
   font-size: 1.2rem;
@@ -16,7 +16,7 @@ export const MessageBox = styled.div`
     content: "";
     width: 1.5rem;
     height: 1.5rem;
-    background: #ccc;
+    background: #fff;
     clip-path: polygon(100% 0, 0% 100%, 100% 100%);
 
     position: absolute;
@@ -26,6 +26,7 @@ export const MessageBox = styled.div`
 `;
 
 export const AutherName = styled.p`
+  margin-bottom: 1rem;
   font-size: 0.9rem;
   color: #000;
   cursor: pointer;
@@ -84,4 +85,4 @@ export const EditButton = styled.button`
 
 export const MsgText = styled.p`
   word-wrap: break-word;
-`
+`;

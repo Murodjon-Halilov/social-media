@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 export const MessageAndAuthContext = createContext({
-  usersData: null,
+  usersData: [],
   setUsersData: () => null,
 });
 
